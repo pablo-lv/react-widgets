@@ -1,25 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Accordion = ({items}) => {
-    const renderedItems = items.map((item) => {
-        return (
-            <React.Fragment key={item.title}>
-                <div className="title active">
-                    <i className="dropdown icon"></i>
-                    {item.title}
-                </div>
-                <div className="content active">
-                    <p>{item.content}</p>
-                </div>
-            </React.Fragment>
-        )
-    });
+const Accordion = ({ items }) => {
+  const [activeIndex, setActiveIndex] = useState(null);
+  const onTitleClick = (index) => {
+    console.log(activeIndex);
+    setActiveIndex(index);
+  };
+
+  const renderedItems = items.map((item, index) => {
+    const active = activeIndex === index ? "active" : "";
 
     return (
-        <div className="ui styled accordion">
-            {renderedItems}
+      <React.Fragment key={item.title}>
+        <div className={`title ${active}`} onClick={() => onTitleClick(index)}>
+          <i className="dropdown icon"></i>
+          {item.title}
         </div>
-    )
-}
+        <div className={`content ${active}`}>
+          <p>{item.content}</p>
+        </div>
+      </React.Fragment>
+    );
+  });
 
-export default Accordion
+  return <div className="ui styled accordion">{renderedItems}</div>;
+};
+
+export default Accordion;
