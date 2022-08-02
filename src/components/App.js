@@ -15,7 +15,7 @@ const items = [
 function App() {
   return (
     <div className="ui container">
-      {/* <Accordion items={items} /> */}
+      <Accordion items={items} />
       <Search />
     </div>
   );
