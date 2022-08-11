@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Accordion = ({ items }) => {
   const [activeIndex, setActiveIndex] = useState(null);
+
   const onTitleClick = (index) => {
-    setActiveIndex(index);
+    if (index === activeIndex) {
+      setActiveIndex(null);
+    } else {
+      setActiveIndex(index);
+    }
   };
 
   const renderedItems = items.map((item, index) => {
     const active = activeIndex === index ? "active" : "";
-
     return (
       <React.Fragment key={item.title}>
         <div className={`title ${active}`} onClick={() => onTitleClick(index)}>
